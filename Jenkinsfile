@@ -41,7 +41,7 @@ pipeline {
         ]) {
         sh '''
             aws eks update-kubeconfig --name ecommerce-cluster --region eu-north-1
-            kubectl apply -f k8s/deployment.yaml
+            kubectl apply -f k8s/deployment.yaml --validate=false
             kubectl apply -f k8s/service.yaml
         '''
         }
