@@ -36,13 +36,17 @@ pipeline {
 
     stage('Deploy to EKS') {
       steps {
-        sh """
-          aws eks update-kubeconfig --name ecommerce-cluster --region eu-north-1
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
-          kubectl apply -f k8s/ingress.yaml
-        """
+        withCredentials([
+        [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds-id']
+        ]) {
+        sh '''
+            aws eks update-kubeconfig --name ecommerce-cluster --region eu-north-1
+            kubectl apply -f k8s/deployment.yaml
+            kubectl apply -f k8s/service.yaml
+        '''
+        }
       }
     }
+
   }
 }
