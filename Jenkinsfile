@@ -2,13 +2,13 @@ pipeline {
   agent any
 
   environment {
-    IMAGE_NAME = 'macclare/ecommerce-api'
+    IMAGE_NAME = 'macclare/ecommerce-backend'
   }
 
   stages {
     stage('Clone') {
       steps {
-        git 'https://github.com/macclare/ecommerce-backend.git'
+        git 'https://github.com/Macclare/ecommerce-java.git'
       }
     }
 
