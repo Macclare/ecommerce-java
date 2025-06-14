@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
-        git 'https://github.com/Macclare/ecommerce-java.git'
+        git branch: 'main', url: 'https://github.com/Macclare/ecommerce-java.git'
       }
     }
 
