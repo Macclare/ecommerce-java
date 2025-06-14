@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
-        git 'https://github.com/Macclare/ecommerce-java.git'
+        git branch: 'main', url: 'https://github.com/Macclare/ecommerce-java.git'
       }
     }
 
@@ -23,7 +23,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
           sh """
             docker login -u $USERNAME -p $PASSWORD
-            docker build -t $IMAGE_NAME:latest .
+            docker build -t $IMAGE_NAME:latest ./backend
             docker push $IMAGE_NAME:latest
           """
         }
